@@ -21,6 +21,7 @@ GtkLabel *lab6;
 GtkLabel *lab7;
 GtkLabel *lab8;
 GtkLabel *lab9;
+GtkWidget *reset_button;
 
 void printBoard();
 void playerMove();
@@ -32,6 +33,9 @@ int checkFreeSpaces();
 char board[3][3] = {{0,0,0},
                     {0,0,0},
                     {0,0,0}};
+
+char board_reset[3][3] = {{0,0,0}, {0,0,0}, {0,0,0}};
+
 const char PLAYER = 'X';
 const char COMPUTER = 'O';
 char winner = ' ';
@@ -59,6 +63,7 @@ int main(int argc, char *argv[])
   lab7 = GTK_LABEL(gtk_builder_get_object(builder, "lab7"));
   lab8 = GTK_LABEL(gtk_builder_get_object(builder, "lab8"));
   lab9 = GTK_LABEL(gtk_builder_get_object(builder, "lab9"));
+  reset_button = GTK_WIDGET(gtk_builder_get_object(builder, "reset_button"));
 	// Essential for a GTK based program
 	gtk_builder_connect_signals(builder, NULL);
 	g_object_unref(builder);
@@ -160,6 +165,17 @@ void printBoard()
    printf(" %d | %d | %d ", board[2][0], board[2][1], board[2][2]);
    printf("\n");
 }
+
+void printReset_Board()
+{
+  printf(" %d | %d | %d ", board_reset[0][0], board_reset[0][1], board_reset[0][2]);
+  printf("\n---|---|---\n");
+  printf(" %d | %d | %d ", board_reset[1][0], board_reset[1][1], board_reset[1][2]);
+  printf("\n---|---|---\n");
+  printf(" %d | %d | %d ", board_reset[2][0], board_reset[2][1], board_reset[2][2]);
+  printf("\n");
+}
+
 void playerMove(int x, int y) {
     if (board[x][y] == 0) {
         board[x][y] = 1; // 1 es igual a la X en el gato
@@ -247,3 +263,19 @@ void printWinner(char winner)
       return freeSpaces;
    }
  }
+
+void reset_button_clicked()
+{
+  printf("RESET GRID\n");
+  printReset_Board();
+  gtk_label_set_text(lab1, " ");
+  gtk_label_set_text(lab2, " ");
+  gtk_label_set_text(lab3, " ");
+  gtk_label_set_text(lab4, " ");
+  gtk_label_set_text(lab5, " ");
+  gtk_label_set_text(lab6, " ");
+  gtk_label_set_text(lab7, " ");
+  gtk_label_set_text(lab8, " ");
+  gtk_label_set_text(lab9, " ");
+  gtk_label_set_text(state_label, " ");
+}
