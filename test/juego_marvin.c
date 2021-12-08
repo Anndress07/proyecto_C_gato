@@ -88,14 +88,16 @@ void gato_main(int x, int y){
   nuevocheckWinner();
   printBoard();
 
-} if (winnerExists == 2) {
+  } if (winnerExists == 2) {
   printf("IT'S A TIE!\n");
-}
+  gtk_label_set_text(state_label, "IT'S A TIE!");
+  }
 
-}
+  }
 // Function to exit our app
 void exit_app()
 {
+
 	printf("Exit app \n"); // Not neccesary
 	gtk_main_quit(); // Command to quit a GTK program
 }
@@ -190,7 +192,6 @@ void playerMove(int x, int y) {
         printf("board[%d][%d] = %d\n", x, y, board[x][y]);
     }
 }
-
 void computerMove() {
     srand(time(0));
     int a;
@@ -203,8 +204,6 @@ void computerMove() {
         board[a][b] = 2; // 2 es igual al O en el gato
         printf("computermove :board[%d][%d] = %d\n", a, b, board[a][b]);
     }
-
-
 void nuevocheckWinner() {
   // REVISANDO FILAS
   // FILA 1
@@ -297,10 +296,61 @@ if (board[0][3] == board[1][3] && board[0][3] == board[2][3] && board[0][3] != 0
 
 }
 
-void reset_button_clicked()
-{
+
+
+void printWinner(int z)
+{  winnerExists = 1;
+   if(z == 1) // 1 ES LA X DEL JUGADOR
+   {
+      printf("YOU WIN!\n");
+      gtk_label_set_text(state_label, "YOU WIN!");
+   }
+   else if(z == 2) // 2 ES EL CIRCULO DEL JUGADOR
+   {
+      printf("YOU LOSE!\n");
+      gtk_label_set_text(state_label, "YOU LOSE!");
+   }
+   //else if (checkFreeSpaces() == 1) {
+      //printf("IT'S A TIE!");
+   }
+
+
+ void checkFreeSpaces() {
+   int freeSpaces = 9;
+   {
+
+
+      for(int i = 0; i < 3; i++)
+      {
+         for(int j = 0; j < 3; j++)
+         {
+            if(board[i][j] != 0)
+            {
+               freeSpaces--;
+            }
+         }
+      }
+      if (freeSpaces == 1) {
+        printf("freespaces: %d\n", freeSpaces);
+        winnerExists = 2;
+     }
+   } printf("freespaces: %d\n", freeSpaces);
+ }
+
+void reset_button_clicked() {
+  spaces = 9;
+  winnerExists = 0;
+
   printf("RESET GRID\n");
-  printReset_Board();
+
+  for(int i = 0; i < 3; i++)
+  {
+     for(int j = 0; j < 3; j++)
+     { board[i][j] = 0;
+       printf("reset board[%d][%d] = %d\n", i, j, board[i][j]);
+     }
+   }
+
   gtk_label_set_text(lab1, " ");
   gtk_label_set_text(lab2, " ");
   gtk_label_set_text(lab3, " ");
@@ -311,43 +361,4 @@ void reset_button_clicked()
   gtk_label_set_text(lab8, " ");
   gtk_label_set_text(lab9, " ");
   gtk_label_set_text(state_label, " ");
-}
-
-void printWinner(int z)
-{  winnerExists = 1;
-   if(z == 1) // 1 ES LA X DEL JUGADOR
-   {
-      printf("YOU WIN!\n");
-      gtk_label_set_text(state_label, "YOU WIN!!");
-   }
-   else if(z == 2) // 2 ES EL CIRCULO DEL JUGADOR
-   {
-      printf("YOU LOSE!\n");
-      gtk_label_set_text(state_label, "YOU LOSE!!");
-   }
-   //else if (checkFreeSpaces() == 1) {
-      //printf("IT'S A TIE!");
-   }
-
-void checkFreeSpaces() {
-  int freeSpaces = 9;
-  { //printf("in checkFreeSpaces");
-
-
-     for(int i = 0; i < 3; i++)
-     {
-        for(int j = 0; j < 3; j++)
-        {
-           if(board[i][j] != 0)
-           {
-              freeSpaces--;
-
-           }
-        }
-     }
-     if (freeSpaces == 1) {
-       printf("freespaces: %d\n", freeSpaces);
-       winnerExists = 2;
-     }
-  } printf("freespaces: %d\n", freeSpaces);
 }
