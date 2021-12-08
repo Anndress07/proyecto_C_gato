@@ -34,7 +34,6 @@ char board[3][3] = {{0,0,0},
                     {0,0,0},
                     {0,0,0}};
 
-char board_reset[3][3] = {{0,0,0}, {0,0,0}, {0,0,0}};
 
 const char PLAYER = 'X';
 const char COMPUTER = 'O';
@@ -81,7 +80,7 @@ void gato_main(int x, int y){
   if (winnerExists == 0)  {
 
   playerMove(x, y);
-  computerMove();
+
   //spaces = checkFreeSpaces();
   //printf("\nespacios: %d\n", spaces);
   checkFreeSpaces();
@@ -106,64 +105,91 @@ void exit_app()
 void button1_clicked()
 {
 	printf("Button1 clicked \n");
-	gtk_label_set_text(lab1, "X");
+
+  if (board[0][0] == 0) {
   gato_main(0,0);
+  gtk_label_set_text(lab1, "X");
+  }
 }
 
 void button2_clicked()
 {
 	printf("Button2 clicked \n");
-	gtk_label_set_text(lab2, "X");
+
+  if (board[0][1] == 0) {
   gato_main(0,1);
+  gtk_label_set_text(lab2, "X");
+}
 }
 
 void button3_clicked()
 {
 	printf("Button3 clicked \n");
-	gtk_label_set_text(lab3, "X");
+
+  if (board[0][2] == 0) {
   gato_main(0,2);
+  gtk_label_set_text(lab3, "X");
+}
 }
 
 void button4_clicked()
 {
 	printf("Button4 clicked \n");
-	gtk_label_set_text(lab4, "X");
+
+  if (board[1][0] == 0) {
   gato_main(1,0);
+  gtk_label_set_text(lab4, "X");
+}
 }
 
 void button5_clicked()
 {
 	printf("Button5 clicked \n");
-	gtk_label_set_text(lab5, "X");
+
+  if (board[1][1] == 0) {
   gato_main(1,1);
+  gtk_label_set_text(lab5, "X");
+}
 }
 
 void button6_clicked()
 {
 	printf("Button6 clicked \n");
-	gtk_label_set_text(lab6, "X");
+
+  if (board[1][2] == 0) {
+  gtk_label_set_text(lab6, "X");
   gato_main(1,2);
+}
 }
 
 void button7_clicked()
 {
 	printf("Button7 clicked \n");
-	gtk_label_set_text(lab7, "X");
+
+  if (board[2][0] == 0) {
   gato_main(2,0);
+  gtk_label_set_text(lab7, "X");
+}
 }
 
 void button8_clicked()
 {
 	printf("Button8 clicked \n");
-	gtk_label_set_text(lab8, "X");
+
+  if (board[2][1] == 0) {
   gato_main(2,1);
+  gtk_label_set_text(lab8, "X");
+}
 }
 
 void button9_clicked()
 {
 	printf("Button9 clicked \n");
-	gtk_label_set_text(lab9, "X");
+
+  if (board[2][2] == 0) {
   gato_main(2,2);
+  gtk_label_set_text(lab9, "X");
+}
 }
 
 void printBoard()
@@ -176,20 +202,13 @@ void printBoard()
    printf("\n");
 }
 
-void printReset_Board()
-{
-  printf(" %d | %d | %d ", board_reset[0][0], board_reset[0][1], board_reset[0][2]);
-  printf("\n---|---|---\n");
-  printf(" %d | %d | %d ", board_reset[1][0], board_reset[1][1], board_reset[1][2]);
-  printf("\n---|---|---\n");
-  printf(" %d | %d | %d ", board_reset[2][0], board_reset[2][1], board_reset[2][2]);
-  printf("\n");
-}
+
 
 void playerMove(int x, int y) {
     if (board[x][y] == 0) {
         board[x][y] = 1; // 1 es igual a la X en el gato
         printf("board[%d][%d] = %d\n", x, y, board[x][y]);
+        computerMove();
     }
 }
 void computerMove() {
@@ -203,7 +222,36 @@ void computerMove() {
   }while (board[a][b] == 1 || board[a][b] == 2);
         board[a][b] = 2; // 2 es igual al O en el gato
         printf("computermove :board[%d][%d] = %d\n", a, b, board[a][b]);
-    }
+        if (board[a][b] == board[0][0]) {
+          gtk_label_set_text(lab1, "O");
+        }
+        if (board[a][b] == board[0][1]) {
+          gtk_label_set_text(lab2, "O");
+        }
+        if (board[a][b] == board[0][2]) {
+          gtk_label_set_text(lab3, "O");
+        }
+        if (board[a][b] == board[1][0]) {
+          gtk_label_set_text(lab4, "O");
+        }
+        if (board[a][b] == board[1][1]) {
+          gtk_label_set_text(lab5, "O");
+        }
+        if (board[a][b] == board[1][2]) {
+          gtk_label_set_text(lab6, "O");
+        }
+        if (board[a][b] == board[2][0]) {
+          gtk_label_set_text(lab7, "O");
+        }
+        if (board[a][b] == board[2][1]) {
+          gtk_label_set_text(lab8, "O");
+        }
+        if (board[a][b] == board[2][2]) {
+          gtk_label_set_text(lab9, "O");
+        }
+
+        }
+
 void nuevocheckWinner() {
   // REVISANDO FILAS
   // FILA 1
