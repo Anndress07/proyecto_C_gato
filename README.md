@@ -12,7 +12,7 @@ Para instalar la biblioteca GTK:
 $ sudo apt-get install libgtk-3-dev
 ```
 
-### Correr el programa
+## Correr el programa
 
 Extraer el archivo y Correr en terminal:
 
