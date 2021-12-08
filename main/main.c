@@ -383,7 +383,7 @@ if (board[0][3] == board[1][3] && board[0][3] == board[2][3] && board[0][3] != 0
 
 
 void printWinner(int z)
-{  winnerExists = 1;
+{  
    if(z == 1) // 1 ES LA X DEL JUGADOR
    {
       printf("YOU WIN!\n");
