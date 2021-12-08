@@ -17,7 +17,9 @@ $ sudo apt-get install libgtk-3-dev
 Extraer el archivo y Correr en terminal:
 
 ```bash
+$ cd main
+
 $ make
 
-$ ./Test
+$ ./Main
 ```
