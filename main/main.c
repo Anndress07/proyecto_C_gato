@@ -108,6 +108,7 @@ void gato_main(int x, int y){
   } if (winnerExists == 2) {
   printf("IT'S A TIE!\n");
   gtk_label_set_text(state_label, "IT'S A TIE!");
+  disableButton();
   }
 
   }
