@@ -1,8 +1,6 @@
-// PROYECTO GATO EN C
-// MARVIN CASTRO --- C01884
-// RONNY GRANADOS -- C03505
+// Libraries
 #include <gtk/gtk.h> // GTK Library
-
+// #include <stdio.h> // C IO Library (Not needed)
 
 #include <ctype.h>
 #include <time.h>
@@ -32,7 +30,6 @@ GtkWidget *button7;
 GtkWidget *button8;
 GtkWidget *button9;
 
-// Funciones main_gato
 void printBoard();
 void playerMove();
 void computerMove();
@@ -45,7 +42,7 @@ void activateButton();
 
 char board[3][3] = {{0,0,0},
                     {0,0,0},
-                    {0,0,0}}; // Tablero del gato
+                    {0,0,0}}; // Tablero de guia que se imprime en la terminal
 
 const char PLAYER = 'X';
 const char COMPUTER = 'O';
@@ -56,14 +53,14 @@ int winnerExists = 0;
 // Main function
 int main(int argc, char *argv[])
 {
-	GtkBuilder *builder;
-	gtk_init(&argc, &argv);
+	GtkBuilder *builder; // GTK Builder variable
+	gtk_init(&argc, &argv); // Start GTK
 
-	builder = gtk_builder_new();
-	gtk_builder_add_from_file(builder, "game-grid.glade", NULL);
+	builder = gtk_builder_new(); // Create GTK UI Builder
+	gtk_builder_add_from_file(builder, "gato_file.glade", NULL); // Load our UI file
 
-	// Asignacion de variables
-  window = GTK_WIDGET(gtk_builder_get_object(builder, "MyWindow2"));
+	// Assign the Variables
+  window = GTK_WIDGET(gtk_builder_get_object(builder, "MyWindow2")); // Load our window named MyWindow
   state_label = GTK_LABEL(gtk_builder_get_object(builder, "state"));
   lab1 = GTK_LABEL(gtk_builder_get_object(builder, "lab1"));
   lab2 = GTK_LABEL(gtk_builder_get_object(builder, "lab2"));
@@ -76,7 +73,7 @@ int main(int argc, char *argv[])
   lab9 = GTK_LABEL(gtk_builder_get_object(builder, "lab9"));
   reset_button = GTK_WIDGET(gtk_builder_get_object(builder, "reset_button"));
 
-  // Botones, controles del gato
+  // Botones
 
   button1 = GTK_WIDGET(gtk_builder_get_object(builder, "button1"));
   button2 = GTK_WIDGET(gtk_builder_get_object(builder, "button2"));
@@ -88,18 +85,16 @@ int main(int argc, char *argv[])
   button8 = GTK_WIDGET(gtk_builder_get_object(builder, "button8"));
   button9 = GTK_WIDGET(gtk_builder_get_object(builder, "button9"));
 
-	// Esenciales de GTK
+	// Essential for a GTK based program
 	gtk_builder_connect_signals(builder, NULL);
 	g_object_unref(builder);
   printBoard();
 
-	gtk_widget_show_all(window);
-	gtk_main();
+	gtk_widget_show_all(window); // Show our window
+	gtk_main(); // Run our program
 
-	return 0;
+	return 0; // Necessary for a c main function
 }
-
- // funcion principal para el gato
 
 void gato_main(int x, int y){
   if (winnerExists == 0)  {
@@ -118,16 +113,15 @@ void gato_main(int x, int y){
 
   }
 
-// funcion para salir
+// Function to exit our app
 void exit_app()
 {
 
-	printf("Exit app \n");
-	gtk_main_quit();
+	printf("Exit app \n"); // Not neccesary
+	gtk_main_quit(); // Command to quit a GTK program
 }
 
-// FUNCIONES PARA CADA BOTON
-
+// Function when our buttons are clicked
 
 void button1_clicked()
 {
@@ -228,7 +222,6 @@ void button9_clicked()
 }
 }
 
-// FUNCION QUE IMPRIME EL BOARD EN LA TERMINAL
 void printBoard()
 {
    printf(" %d | %d | %d ", board[0][0], board[0][1], board[0][2]);
@@ -238,25 +231,14 @@ void printBoard()
    printf(" %d | %d | %d ", board[2][0], board[2][1], board[2][2]);
    printf("\n");
 }
-/* FUNCION QUE SE ENCARGA DE MOVER LA POSICION DEL JUGADOR
-   1. si la posicion escogida por el jugador esta vacia, playerMove coloca
-   la X en esa posicion
-   2. llama a computerMove();
-*/
+
 void playerMove(int x, int y) {
     if (board[x][y] == 0) {
         board[x][y] = 1; // 1 es igual a la X en el gato
         printf("board[%d][%d] = %d\n", x, y, board[x][y]);
-        nuevocheckWinner();
         computerMove();
     }
 }
-/*FUNCION QUE SE ENCARGA DE MOVER LA POSICION DE LA MAQUINA
-1. generar dos numeros al azar, establecer indices con esos numeros
-2. verificar que ese espacio no este ocupado
-3. mover la posicion de la maquina
-4. Imprimir el marcador "O" en la posicion respectiva, en la ventana del gato
-*/
 void computerMove() {
     srand(time(0));
     int a;
@@ -304,14 +286,8 @@ void computerMove() {
           gtk_label_set_text(lab9, "O");
           gtk_widget_set_sensitive(button9, FALSE);
         }
-        nuevocheckWinner();
 
         }
-/* FUNCION QUE BUSCA EL GANADOR, COMPARANDO FILA POR FILA, COLUMNA POR COLUMNA
-   A LO LARGO DE TODO EL BOARD.
-   tambien en las diagonales
-*/
-
 
 void nuevocheckWinner() {
   // REVISANDO FILAS
@@ -405,10 +381,7 @@ if (board[0][3] == board[1][3] && board[0][3] == board[2][3] && board[0][3] != 0
 
 }
 
-// FUNCION QUE IMPRIME EL RESULTADO DE LA PARTIDA
-// PARAMETRO z: viene de nuevocheckWinner
-//              z = 1; el jugador gano
-//              z = 2; la maquina gano
+
 void printWinner(int z)
 {  winnerExists = 1;
    if(z == 1) // 1 ES LA X DEL JUGADOR
@@ -421,12 +394,10 @@ void printWinner(int z)
    {
       printf("YOU LOSE!\n");
       gtk_label_set_text(state_label, "YOU LOSE!");
-      disableButton();
    }
 }
 
-// FUNCION QUE VERIFICA LA CANTIDAD DE ESPACIOS LIBRES EN EL BOARD, A LO LARGO
-// DE LA PARTIDA
+
  void checkFreeSpaces() {
    int freeSpaces = 9;
    {
@@ -447,7 +418,6 @@ void printWinner(int z)
    } printf("freespaces: %d\n", freeSpaces);
  }
 
-// FUNCION QUE RESETEA EL JUEGO (BOARD, BOTONES, LABELS)
 void reset_button_clicked() {
   spaces = 9;
   winnerExists = 0;
@@ -475,9 +445,7 @@ void reset_button_clicked() {
 
   activateButton();
 }
-\
-// FUNCION QUE DESACTIVA LA FUNCIONALIDAD DE LOS BOTONES, CUANDO ESTOS SON
-// PRESIONADOS UNA VEZ
+
 void disableButton()
 {
   gtk_widget_set_sensitive(button1, FALSE);
@@ -490,7 +458,7 @@ void disableButton()
   gtk_widget_set_sensitive(button8, FALSE);
   gtk_widget_set_sensitive(button9, FALSE);
 }
-// FUNCION QUE VUELVE A ACTIVAR LOS BOTONES
+
 void activateButton()
 {
   gtk_widget_set_sensitive(button1, TRUE);
