@@ -129,6 +129,7 @@ void button1_clicked()
   if (board[0][0] == 0) {
   gato_main(0,0);
   gtk_label_set_text(lab1, "X");
+  gtk_widget_set_sensitive(button1, FALSE);
   }
 }
 
@@ -139,6 +140,7 @@ void button2_clicked()
   if (board[0][1] == 0) {
   gato_main(0,1);
   gtk_label_set_text(lab2, "X");
+  gtk_widget_set_sensitive(button2, FALSE);
 }
 }
 
@@ -149,6 +151,7 @@ void button3_clicked()
   if (board[0][2] == 0) {
   gato_main(0,2);
   gtk_label_set_text(lab3, "X");
+  gtk_widget_set_sensitive(button3, FALSE);
 }
 }
 
@@ -159,6 +162,7 @@ void button4_clicked()
   if (board[1][0] == 0) {
   gato_main(1,0);
   gtk_label_set_text(lab4, "X");
+  gtk_widget_set_sensitive(button4, FALSE);
 }
 }
 
@@ -169,6 +173,7 @@ void button5_clicked()
   if (board[1][1] == 0) {
   gato_main(1,1);
   gtk_label_set_text(lab5, "X");
+  gtk_widget_set_sensitive(button5, FALSE);
 }
 }
 
@@ -179,6 +184,7 @@ void button6_clicked()
   if (board[1][2] == 0) {
   gtk_label_set_text(lab6, "X");
   gato_main(1,2);
+  gtk_widget_set_sensitive(button6, FALSE);
 }
 }
 
@@ -189,6 +195,7 @@ void button7_clicked()
   if (board[2][0] == 0) {
   gato_main(2,0);
   gtk_label_set_text(lab7, "X");
+  gtk_widget_set_sensitive(button7, FALSE);
 }
 }
 
@@ -199,6 +206,7 @@ void button8_clicked()
   if (board[2][1] == 0) {
   gato_main(2,1);
   gtk_label_set_text(lab8, "X");
+  gtk_widget_set_sensitive(button8, FALSE);
 }
 }
 
@@ -209,6 +217,7 @@ void button9_clicked()
   if (board[2][2] == 0) {
   gato_main(2,2);
   gtk_label_set_text(lab9, "X");
+  gtk_widget_set_sensitive(button9, FALSE);
 }
 }
 
@@ -242,30 +251,39 @@ void computerMove() {
         printf("computermove :board[%d][%d] = %d\n", a, b, board[a][b]);
         if (board[a][b] == board[0][0]) {
           gtk_label_set_text(lab1, "O");
+          gtk_widget_set_sensitive(button1, FALSE);
         }
         if (board[a][b] == board[0][1]) {
           gtk_label_set_text(lab2, "O");
+          gtk_widget_set_sensitive(button2, FALSE);
         }
         if (board[a][b] == board[0][2]) {
           gtk_label_set_text(lab3, "O");
+          gtk_widget_set_sensitive(button3, FALSE);
         }
         if (board[a][b] == board[1][0]) {
           gtk_label_set_text(lab4, "O");
+          gtk_widget_set_sensitive(button4, FALSE);
         }
         if (board[a][b] == board[1][1]) {
           gtk_label_set_text(lab5, "O");
+          gtk_widget_set_sensitive(button5, FALSE);
         }
         if (board[a][b] == board[1][2]) {
           gtk_label_set_text(lab6, "O");
+          gtk_widget_set_sensitive(button6, FALSE);
         }
         if (board[a][b] == board[2][0]) {
           gtk_label_set_text(lab7, "O");
+          gtk_widget_set_sensitive(button7, FALSE);
         }
         if (board[a][b] == board[2][1]) {
           gtk_label_set_text(lab8, "O");
+          gtk_widget_set_sensitive(button8, FALSE);
         }
         if (board[a][b] == board[2][2]) {
           gtk_label_set_text(lab9, "O");
+          gtk_widget_set_sensitive(button9, FALSE);
         }
 
         }
