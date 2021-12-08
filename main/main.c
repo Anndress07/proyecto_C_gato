@@ -19,12 +19,26 @@ GtkLabel *lab8;
 GtkLabel *lab9;
 GtkWidget *reset_button;
 
+// Botones
+GtkWidget *button1;
+GtkWidget *button2;
+GtkWidget *button3;
+GtkWidget *button4;
+GtkWidget *button5;
+GtkWidget *button6;
+GtkWidget *button7;
+GtkWidget *button8;
+GtkWidget *button9;
+
 void printBoard();
 void playerMove();
 void computerMove();
 void nuevocheckWinner();
 void printWinner(int);
 void checkFreeSpaces();
+void gtk_widget_set_sensitive(GtkWidget *widget, gboolean sensitive);
+void disableButton();
+void activateButton();
 
 char board[3][3] = {{0,0,0},
                     {0,0,0},
@@ -58,6 +72,18 @@ int main(int argc, char *argv[])
   lab8 = GTK_LABEL(gtk_builder_get_object(builder, "lab8"));
   lab9 = GTK_LABEL(gtk_builder_get_object(builder, "lab9"));
   reset_button = GTK_WIDGET(gtk_builder_get_object(builder, "reset_button"));
+
+  // Botones
+
+  button1 = GTK_WIDGET(gtk_builder_get_object(builder, "button1"));
+  button2 = GTK_WIDGET(gtk_builder_get_object(builder, "button2"));
+  button3 = GTK_WIDGET(gtk_builder_get_object(builder, "button3"));
+  button4 = GTK_WIDGET(gtk_builder_get_object(builder, "button4"));
+  button5 = GTK_WIDGET(gtk_builder_get_object(builder, "button5"));
+  button6 = GTK_WIDGET(gtk_builder_get_object(builder, "button6"));
+  button7 = GTK_WIDGET(gtk_builder_get_object(builder, "button7"));
+  button8 = GTK_WIDGET(gtk_builder_get_object(builder, "button8"));
+  button9 = GTK_WIDGET(gtk_builder_get_object(builder, "button9"));
 
 	// Essential for a GTK based program
 	gtk_builder_connect_signals(builder, NULL);
@@ -343,6 +369,7 @@ void printWinner(int z)
    {
       printf("YOU WIN!\n");
       gtk_label_set_text(state_label, "YOU WIN!");
+      disableButton();
    }
    else if(z == 2) // 2 ES EL CIRCULO DEL JUGADOR
    {
@@ -396,4 +423,32 @@ void reset_button_clicked() {
   gtk_label_set_text(lab8, " ");
   gtk_label_set_text(lab9, " ");
   gtk_label_set_text(state_label, " ");
+
+  activateButton();
+}
+
+void disableButton()
+{
+  gtk_widget_set_sensitive(button1, FALSE);
+  gtk_widget_set_sensitive(button2, FALSE);
+  gtk_widget_set_sensitive(button3, FALSE);
+  gtk_widget_set_sensitive(button4, FALSE);
+  gtk_widget_set_sensitive(button5, FALSE);
+  gtk_widget_set_sensitive(button6, FALSE);
+  gtk_widget_set_sensitive(button7, FALSE);
+  gtk_widget_set_sensitive(button8, FALSE);
+  gtk_widget_set_sensitive(button9, FALSE);
+}
+
+void activateButton()
+{
+  gtk_widget_set_sensitive(button1, TRUE);
+  gtk_widget_set_sensitive(button2, TRUE);
+  gtk_widget_set_sensitive(button3, TRUE);
+  gtk_widget_set_sensitive(button4, TRUE);
+  gtk_widget_set_sensitive(button5, TRUE);
+  gtk_widget_set_sensitive(button6, TRUE);
+  gtk_widget_set_sensitive(button7, TRUE);
+  gtk_widget_set_sensitive(button8, TRUE);
+  gtk_widget_set_sensitive(button9, TRUE);
 }
