@@ -28,8 +28,7 @@ void checkFreeSpaces();
 
 char board[3][3] = {{0,0,0},
                     {0,0,0},
-                    {0,0,0}};
-
+                    {0,0,0}}; // Tablero de guia que se imprime en la terminal
 
 const char PLAYER = 'X';
 const char COMPUTER = 'O';
