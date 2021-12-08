@@ -1,0 +1,3 @@
+CC = gcc
+myapp: myapp.c
+	${CC} -o MyApp myapp.c -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic

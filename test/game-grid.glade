@@ -176,7 +176,11 @@
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Player 1: X</property>
+                <property name="label" translatable="yes">Player 1: X
+
+..................
+
+Player 2: O</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -190,7 +194,6 @@
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
-                <property name="label" translatable="yes">  </property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -199,12 +202,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="player2">
+              <object class="GtkButton" id="reset_button">
+                <property name="label" translatable="yes">RESET</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Player 2: O</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="reset_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -351,5 +354,9 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkMenu">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
   </object>
 </interface>
