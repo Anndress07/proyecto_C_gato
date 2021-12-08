@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 	gtk_init(&argc, &argv); // Start GTK
 
 	builder = gtk_builder_new(); // Create GTK UI Builder
-	gtk_builder_add_from_file(builder, "game-grid.glade", NULL); // Load our UI file
+	gtk_builder_add_from_file(builder, "gato_file.glade", NULL); // Load our UI file
 
 	// Assign the Variables
   window = GTK_WIDGET(gtk_builder_get_object(builder, "MyWindow2")); // Load our window named MyWindow
