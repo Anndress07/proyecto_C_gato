@@ -1,15 +1,15 @@
 # Proyecto C - Juego gato
 
-Correr en terminal:
+Para instalar la biblioteca GTK:
 
 ```bash
-$ gcc -o MyApp myapp.c -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
+$ sudo apt-get install libgtk-3-dev
 ```
-o con la opcion de Makefile
+
+Extraer el archivo y Correr en terminal:
 
 ```bash
 $ make
-```
-```bash
+
 $ ./Test
 ```

@@ -34,13 +34,12 @@ char board[3][3] = {{0,0,0},
                     {0,0,0},
                     {0,0,0}};
 
-char board_reset[3][3] = {{0,0,0}, {0,0,0}, {0,0,0}};
-
 const char PLAYER = 'X';
 const char COMPUTER = 'O';
 char winner = ' ';
 int spaces;
 int winnerExists = 0;
+int freeSpaces = 9;
 
 // Main function
 int main(int argc, char *argv[])
@@ -88,12 +87,13 @@ void gato_main(int x, int y){
   nuevocheckWinner();
   printBoard();
 
-  } if (winnerExists == 2) {
-  printf("IT'S A TIE!\n");
-  gtk_label_set_text(state_label, "IT'S A TIE!");
+  }
+	// if (winnerExists == 2) {
+  // printf("IT'S A TIE!\n");
+  // gtk_label_set_text(state_label, "IT'S A TIE!");
   }
 
-  }
+
 // Function to exit our app
 void exit_app()
 {
@@ -159,15 +159,13 @@ void button8_clicked()
   gato_main(2,1);
 }
 
-void button9_clicked()
-{
+void button9_clicked() {
 	printf("Button9 clicked \n");
 	gtk_label_set_text(lab9, "X");
   gato_main(2,2);
 }
 
-void printBoard()
-{
+void printBoard() {
    printf(" %d | %d | %d ", board[0][0], board[0][1], board[0][2]);
    printf("\n---|---|---\n");
    printf(" %d | %d | %d ", board[1][0], board[1][1], board[1][2]);
@@ -176,15 +174,14 @@ void printBoard()
    printf("\n");
 }
 
-void printReset_Board()
-{
-  printf(" %d | %d | %d ", board_reset[0][0], board_reset[0][1], board_reset[0][2]);
-  printf("\n---|---|---\n");
-  printf(" %d | %d | %d ", board_reset[1][0], board_reset[1][1], board_reset[1][2]);
-  printf("\n---|---|---\n");
-  printf(" %d | %d | %d ", board_reset[2][0], board_reset[2][1], board_reset[2][2]);
-  printf("\n");
-}
+// void printReset_Board() {
+//   printf(" %d | %d | %d ", board_reset[0][0], board_reset[0][1], board_reset[0][2]);
+//   printf("\n---|---|---\n");
+//   printf(" %d | %d | %d ", board_reset[1][0], board_reset[1][1], board_reset[1][2]);
+//   printf("\n---|---|---\n");
+//   printf(" %d | %d | %d ", board_reset[2][0], board_reset[2][1], board_reset[2][2]);
+//   printf("\n");
+// }
 
 void playerMove(int x, int y) {
     if (board[x][y] == 0) {
@@ -192,6 +189,7 @@ void playerMove(int x, int y) {
         printf("board[%d][%d] = %d\n", x, y, board[x][y]);
     }
 }
+
 void computerMove() {
     srand(time(0));
     int a;
@@ -202,8 +200,9 @@ void computerMove() {
 
   }while (board[a][b] == 1 || board[a][b] == 2);
         board[a][b] = 2; // 2 es igual al O en el gato
-        printf("computermove :board[%d][%d] = %d\n", a, b, board[a][b]);
+        printf("computermove: board[%d][%d] = %d\n", a, b, board[a][b]);
     }
+
 void nuevocheckWinner() {
   // REVISANDO FILAS
   // FILA 1
@@ -297,9 +296,8 @@ if (board[0][3] == board[1][3] && board[0][3] == board[2][3] && board[0][3] != 0
 }
 
 
-
-void printWinner(int z)
-{  winnerExists = 1;
+void printWinner(int z) {
+	// winnerExists = 1;
    if(z == 1) // 1 ES LA X DEL JUGADOR
    {
       printf("YOU WIN!\n");
@@ -310,35 +308,39 @@ void printWinner(int z)
       printf("YOU LOSE!\n");
       gtk_label_set_text(state_label, "YOU LOSE!");
    }
+	 else
+	 {
+		 printf("IT'S A TIE!");
+		 gtk_label_set_text(state_label, "IT'S A TIE!");
+	 }
    //else if (checkFreeSpaces() == 1) {
       //printf("IT'S A TIE!");
    }
 
 
- void checkFreeSpaces() {
-   int freeSpaces = 9;
-   {
+	 void checkFreeSpaces() {
+	   freeSpaces = 9;
+	   {
+	      for(int i = 0; i < 3; i++)
+	      {
+	         for(int j = 0; j < 3; j++)
+	         {
+	            if(board[i][j] != 0)
+	            {
+	               freeSpaces--;
+	            }
+	         }
+	      }
+	      if (freeSpaces == 1) {
+	        printf("freespaces: %d\n", freeSpaces);
+	        printWinner(3);
+	     }
+	   } printf("freespaces: %d\n", freeSpaces);
+	 }
 
-
-      for(int i = 0; i < 3; i++)
-      {
-         for(int j = 0; j < 3; j++)
-         {
-            if(board[i][j] != 0)
-            {
-               freeSpaces--;
-            }
-         }
-      }
-      if (freeSpaces == 1) {
-        printf("freespaces: %d\n", freeSpaces);
-        winnerExists = 2;
-     }
-   } printf("freespaces: %d\n", freeSpaces);
- }
 
 void reset_button_clicked() {
-  spaces = 9;
+  // spaces = 9;
   winnerExists = 0;
 
   printf("RESET GRID\n");

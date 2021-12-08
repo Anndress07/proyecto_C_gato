@@ -1,7 +1,3 @@
-// My Application
-//
-
-
 // Libraries
 #include <gtk/gtk.h> // GTK Library
 #include <stdio.h> // C IO Library (Not needed)
