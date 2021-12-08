@@ -1,6 +1,6 @@
 // Libraries
 #include <gtk/gtk.h> // GTK Library
-#include <stdio.h> // C IO Library (Not needed)
+// #include <stdio.h> // C IO Library (Not needed)
 
 #include <ctype.h>
 #include <time.h>
@@ -43,8 +43,6 @@ int main(int argc, char *argv[])
 	GtkBuilder *builder; // GTK Builder variable
 	gtk_init(&argc, &argv); // Start GTK
 
-
-
 	builder = gtk_builder_new(); // Create GTK UI Builder
 	gtk_builder_add_from_file(builder, "game-grid.glade", NULL); // Load our UI file
 
@@ -61,6 +59,7 @@ int main(int argc, char *argv[])
   lab8 = GTK_LABEL(gtk_builder_get_object(builder, "lab8"));
   lab9 = GTK_LABEL(gtk_builder_get_object(builder, "lab9"));
   reset_button = GTK_WIDGET(gtk_builder_get_object(builder, "reset_button"));
+
 	// Essential for a GTK based program
 	gtk_builder_connect_signals(builder, NULL);
 	g_object_unref(builder);
@@ -77,8 +76,6 @@ void gato_main(int x, int y){
 
   playerMove(x, y);
 
-  //spaces = checkFreeSpaces();
-  //printf("\nespacios: %d\n", spaces);
   checkFreeSpaces();
   nuevocheckWinner();
   printBoard();
@@ -89,6 +86,7 @@ void gato_main(int x, int y){
   }
 
   }
+
 // Function to exit our app
 void exit_app()
 {
@@ -97,7 +95,8 @@ void exit_app()
 	gtk_main_quit(); // Command to quit a GTK program
 }
 
-// Function when our button is pressed
+// Function when our buttons are clicked
+
 void button1_clicked()
 {
 	printf("Button1 clicked \n");
@@ -197,8 +196,6 @@ void printBoard()
    printf(" %d | %d | %d ", board[2][0], board[2][1], board[2][2]);
    printf("\n");
 }
-
-
 
 void playerMove(int x, int y) {
     if (board[x][y] == 0) {
@@ -341,7 +338,6 @@ if (board[0][3] == board[1][3] && board[0][3] == board[2][3] && board[0][3] != 0
 }
 
 
-
 void printWinner(int z)
 {  winnerExists = 1;
    if(z == 1) // 1 ES LA X DEL JUGADOR
@@ -354,16 +350,12 @@ void printWinner(int z)
       printf("YOU LOSE!\n");
       gtk_label_set_text(state_label, "YOU LOSE!");
    }
-   //else if (checkFreeSpaces() == 1) {
-      //printf("IT'S A TIE!");
-   }
+}
 
 
  void checkFreeSpaces() {
    int freeSpaces = 9;
    {
-
-
       for(int i = 0; i < 3; i++)
       {
          for(int j = 0; j < 3; j++)

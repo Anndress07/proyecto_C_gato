@@ -1,4 +1,0 @@
-#corra el archivo en la consola con
-gcc -o Test test.c -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
-#despues con
-./Test
