@@ -25,9 +25,9 @@ GtkLabel *label22;
 void printBoard();
 void playerMove();
 void computerMove();
-char checkWinner();
-void printWinner(char);
-int checkFreeSpaces();
+void nuevocheckWinner();
+void printWinner(int);
+void checkFreeSpaces();
 
 char board[3][3] = {{0,0,0},
                     {0,0,0},
@@ -35,6 +35,8 @@ char board[3][3] = {{0,0,0},
 const char PLAYER = 'X';
 const char COMPUTER = 'O';
 char winner = ' ';
+int spaces;
+int winnerExists = 0;
 
 // Main function
 int main(int argc, char *argv[])
@@ -71,15 +73,24 @@ int main(int argc, char *argv[])
 }
 
 void gato_main(int x, int y){
-
+  if (winnerExists == 0)  {
 
   playerMove(x, y);
   computerMove();
+  //spaces = checkFreeSpaces();
+  //printf("\nespacios: %d\n", spaces);
+  checkFreeSpaces();
+  nuevocheckWinner();
   printBoard();
-  winner = checkWinner();
-  printWinner(winner);
+
+} if (winnerExists == 2) {
+  printf("IT'S A TIE!\n");
+}
 
 }
+  //printWinner(winner);
+
+
 // Function to exit our app
 void exit_app()
 {
@@ -178,69 +189,175 @@ void computerMove() {
         board[a][b] = 2; // 2 es igual al O en el gato
         printf("computermove :board[%d][%d] = %d\n", a, b, board[a][b]);
     }
-char checkWinner() {
-   //check rows
-   for(int i = 0; i < 3; i++)
-   {
-      if(board[i][0] == board[i][1] && board[i][0] == board[i][2])
-      {
 
-         return board[i][0];
-      }
-   }
-   //check columns
-   for(int i = 0; i < 3; i++)
-   {
-      if(board[0][i] == board[1][i] && board[0][i] == board[2][i])
-      {
 
-         return board[0][i];
-      }
-   }
-   //check diagonals
-   if(board[0][0] == board[1][1] && board[0][0] == board[2][2])
-   {
-
-      return board[0][0];
-   }
-   if(board[0][2] == board[1][1] && board[0][2] == board[2][0])
-   {
-
-      return board[0][2];
-   }
-
-   return ' ';
+void nuevocheckWinner() {
+  // REVISANDO FILAS
+  // FILA 1
+  if (board[0][0] == board[0][1] && board[0][0] == board[0][2] && board[0][0] != 0) {
+    printf("hay ganador por fila\n");
+    if (board[0][0] == 1) {
+    printWinner(1);
+  } else if (board[0][0] == 2) {
+    printWinner(2);
+  }
+}
+// FILA 2
+if (board[1][0] == board[1][1] && board[1][0] == board[1][2] && board[1][0] != 0) {
+  printf("hay ganador por fila\n");
+  if (board[1][0] == 1) {
+  printWinner(1);
+} else if (board[1][0] == 2) {
+  printWinner(2);
+}
+}
+// FILA 3
+if (board[2][0] == board[2][1] && board[2][0] == board[2][2] && board[2][0] != 0) {
+  printf("hay ganador por fila\n");
+  if (board[2][0] == 1) {
+  printWinner(1);
+} else if (board[2][0] == 2) {
+  printWinner(2);
+}
 }
 
-void printWinner(char winner)
-{
-   if(winner == 1) // 1 ES LA X DEL JUGADOR
-   {
-      printf("YOU WIN!");
+// REVISANDO COLUMNAS
+// REVISANDO COL 0
+  if (board[0][0] == board[1][0] && board[0][0] == board[2][0] && board[1][0] != 0) {
+    printf("hay ganador por cols\n");
+    if (board[1][0] == 1) {
+    printWinner(1);
+  } else if (board[1][0] == 2) {
+    printWinner(2);
+  }
+}
+// REVISANDO COL 1
+if (board[0][1] == board[1][1] && board[0][1] == board[2][1] && board[0][1] != 0) {
+  printf("hay ganador por cols\n");
+  if (board[0][1] == 1) {
+  printWinner(1);
+} else if (board[0][1] == 2) {
+  printWinner(2);
+  }
+}
+
+//REVISANDO COL 2
+if (board[0][2] == board[1][2] && board[0][2] == board[2][2] && board[0][2] != 0) {
+  printf("hay ganador por cols\n");
+  if (board[0][2] == 1) {
+  printWinner(1);
+} else if (board[0][2] == 2) {
+  printWinner(2);
+  }
+}
+
+//REVISANDO COL 3
+
+if (board[0][3] == board[1][3] && board[0][3] == board[2][3] && board[0][3] != 0) {
+  printf("hay ganador por cols\n");
+  if (board[0][3] == 1) {
+  printWinner(1);
+  } else if (board[0][3] == 2) {
+  printWinner(2);
+  }
+}
+// REVISANDO DIAGONALES
+// DIAGONAL 00 -> 22
+ if (board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != 0) {
+   printf("hay ganador por diagon\n");
+   if (board[0][0] == 1) {
+   printWinner(1);
+   } else if (board[0][0] == 2) {
+   printWinner(2);
    }
-   else if(winner == 2) // 2 ES EL CIRCULO DEL JUGADOR
-   {
-      printf("YOU LOSE!");
-   }
-   else if (checkFreeSpaces() == 1) {
-      printf("IT'S A TIE!");
+ }
+ // DIAGONAL 20 -> 02
+ if (board[2][0] == board[1][1] && board[2][0] == board[0][2] && board[2][0] != 0) {
+   printf("hay ganador por diagon\n");
+   if (board[2][0] == 1) {
+   printWinner(1);
+ } else if (board[2][0] == 2) {
+   printWinner(2);
    }
  }
 
- int checkFreeSpaces() {
+
+
+
+}
+
+// char checkWinner() {
+//    //check rows
+//    for(int i = 0; i < 3; i++)
+//    {
+//         printf("checkwinner rows :board[%d][%d] = %d\n", i, 0, board[i][0]);
+//         printf("checkwinner rows :board[%d][%d] = %d\n", i, 1, board[i][1]);
+//         printf("checkwinner rows :board[%d][%d] = %d\n", i, 2, board[i][2]);
+//         printf("-------%d ciclo------", i);
+//       if(board[i][0] == board[i][1] && board[i][0] == board[i][2])
+//       {
+//
+//          return board[i][0];
+//       }
+//    }
+//    //check columns
+//    for(int i = 0; i < 3; i++)
+//    {
+//       if(board[0][i] == board[1][i] && board[0][i] == board[2][i])
+//       {
+//
+//          return board[0][i];
+//       }
+//    }
+//    //check diagonals
+//    if(board[0][0] == board[1][1] && board[0][0] == board[2][2])
+//    {
+//
+//       return board[0][0];
+//    }
+//    if(board[0][2] == board[1][1] && board[0][2] == board[2][0])
+//    {
+//
+//       return board[0][2];
+//    }
+//
+//    return ' ';
+// }
+
+void printWinner(int z)
+{  winnerExists = 1;
+   if(z == 1) // 1 ES LA X DEL JUGADOR
    {
-      int freeSpaces = 9;
+      printf("YOU WIN!\n");
+   }
+   else if(z == 2) // 2 ES EL CIRCULO DEL JUGADOR
+   {
+      printf("YOU LOSE!\n");
+   }
+   //else if (checkFreeSpaces() == 1) {
+      //printf("IT'S A TIE!");
+   }
+
+
+ void checkFreeSpaces() {
+   int freeSpaces = 9;
+   { //printf("in checkFreeSpaces");
+
 
       for(int i = 0; i < 3; i++)
       {
          for(int j = 0; j < 3; j++)
          {
-            if(board[i][j] != ' ')
+            if(board[i][j] != 0)
             {
                freeSpaces--;
+
             }
          }
       }
-      return freeSpaces;
-   }
+      if (freeSpaces == 1) {
+        printf("freespaces: %d\n", freeSpaces);
+        winnerExists = 2;
+      }
+   } printf("freespaces: %d\n", freeSpaces);
  }
